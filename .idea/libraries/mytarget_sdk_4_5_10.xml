@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="mytarget-sdk-4.5.10">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/build/intermediates/exploded-aar/com.my.target/mytarget-sdk/4.5.10/res" />
+      <root url="jar://$PROJECT_DIR$/build/intermediates/exploded-aar/com.my.target/mytarget-sdk/4.5.10/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
