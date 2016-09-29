@@ -32,10 +32,6 @@ public class MainActivity extends ParentActivity {
     // массив ID View-компонентов, в которые будут вставлять данные
     private int[] to = {R.id.textVNode_text, R.id.textVDate };
 
-    /* реклама */
-    private AdView mAdView;
-    private MyTargetView adView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,37 +64,7 @@ public class MainActivity extends ParentActivity {
         sAdapterNotes = new CursorNoteAdapter(this,R.layout.list_notes_activity, cursor_Notes, from, to);
         listViewNodes.setAdapter(sAdapterNotes);
 
-        // Создаем экземпляр MyTargetView
-        adView = (MyTargetView) findViewById(R.id.adMyView);;
 
-        // Инициализируем экземпляр
-        adView.init(SLOT_ID);
-
-
-        // Устанавливаем слушатель событий
-        adView.setListener(new MyTargetView.MyTargetViewListener()
-        {
-            @Override
-            public void onLoad(MyTargetView myTargetView)
-            {
-                // Данные успешно загружены, запускаем показ объявлений
-                myTargetView.start();
-            }
-
-            @Override
-            public void onNoAd(String reason, MyTargetView myTargetView)
-            {
-            }
-
-            @Override
-            public void onClick(MyTargetView myTargetView)
-            {
-            }
-        });
-
-
-        adView.load();
-        /*
         // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
         // values/strings.xml.
         mAdView = (AdView) findViewById(R.id.ad_view);
@@ -113,7 +79,7 @@ public class MainActivity extends ParentActivity {
                 .build();
 
         // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);*/
+        mAdView.loadAd(adRequest);
     }
 
 
@@ -127,25 +93,22 @@ public class MainActivity extends ParentActivity {
         if (mAdView != null) {
             mAdView.destroy();
         }
-        if (adView != null) adView.destroy();
         super.onDestroy();
     }
 
     @Override
     protected void onResume() {
-        if (adView != null) adView.resume();
-        super.onResume();
         cursor_Notes = getAllNotes();
         sAdapterNotes.changeCursor(cursor_Notes);
         if (mAdView != null) {
             mAdView.resume();
         }
+        super.onResume();
     }
 
     /** Called when leaving the activity */
     @Override
     public void onPause() {
-        if (adView != null) adView.pause();
         if (mAdView != null) {
             mAdView.pause();
         }

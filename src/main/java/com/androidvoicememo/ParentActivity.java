@@ -28,6 +28,7 @@ import com.androidvoicememo.adapters.CursorNoteAdapter;
 import com.androidvoicememo.adapters.TimeNotification;
 import com.androidvoicememo.db.SQLiteDBHelper;
 import com.androidvoicememo.model.Note;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.targeting402.sdk.main.Targeting_402;
 
@@ -62,6 +63,8 @@ public class ParentActivity extends AppCompatActivity implements View.OnClickLis
 
     private SharedPreferences sPref;
     final String INSTALL_PREF = "install_prilogenie";
+    /* реклама */
+    protected AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

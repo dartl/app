@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.androidvoicememo.adapters.OpenFileDialog;
 import com.androidvoicememo.db.SQLiteDBHelper;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.my.target.ads.MyTargetView;
 
 import java.io.File;
@@ -39,7 +41,6 @@ public class ImportExportActivity extends ParentActivity {
     private String importFileName;
     private Boolean isImport = false;
 
-    private MyTargetView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,35 +82,21 @@ public class ImportExportActivity extends ParentActivity {
             }
         });
 
-        // Создаем экземпляр MyTargetView
-        adView = (MyTargetView) findViewById(R.id.adMyView);
-
-        // Инициализируем экземпляр
-        adView.init(SLOT_ID);
-
-        // Устанавливаем слушатель событий
-        adView.setListener(new MyTargetView.MyTargetViewListener()
-        {
-            @Override
-            public void onLoad(MyTargetView myTargetView)
-            {
-                // Данные успешно загружены, запускаем показ объявлений
-                myTargetView.start();
-            }
-
-            @Override
-            public void onNoAd(String reason, MyTargetView myTargetView)
-            {
-            }
-
-            @Override
-            public void onClick(MyTargetView myTargetView)
-            {
-            }
-        });
+        // Gets the ad view defined in layout/ad_fragment.xml with ad unit ID set in
+        // values/strings.xml.
+        mAdView = (AdView) findViewById(R.id.ad_view);
 
 
-        adView.load();
+
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device. e.g.
+        // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
+        AdRequest adRequest = new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build();
+
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -182,20 +169,26 @@ public class ImportExportActivity extends ParentActivity {
 
     @Override
     public void onDestroy(){
-        if (adView != null) adView.destroy();
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
         super.onDestroy();
     }
 
     @Override
     protected void onResume() {
-        if (adView != null) adView.resume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
         super.onResume();
     }
 
     /** Called when leaving the activity */
     @Override
     public void onPause() {
-        if (adView != null) adView.pause();
+        if (mAdView != null) {
+            mAdView.pause();
+        }
         super.onPause();
     }
 

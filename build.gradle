@@ -8,8 +8,8 @@ android {
         applicationId "com.gawk.voicenotes"
         minSdkVersion 15
         targetSdkVersion 23
-        versionCode 8
-        versionName "5.1"
+        versionCode 9
+        versionName "5.11"
         multiDexEnabled true
     }
     buildTypes {

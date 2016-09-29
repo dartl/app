@@ -130,12 +130,14 @@
     </LinearLayout>
 
     </FrameLayout>
-    <com.my.target.ads.MyTargetView
+    <include
+        layout="@layout/ads_layout"
         android:id="@+id/adMyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></com.my.target.ads.MyTargetView>
+        android:layout_alignParentStart="true">
+    </include>
 </RelativeLayout>
